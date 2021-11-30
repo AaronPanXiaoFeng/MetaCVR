@@ -1,0 +1,62 @@
+{
+  "CVR": {
+    "model_type": "cvr",
+    "prob": "68",
+    "ps_num": 2,
+    "embedding_min_slice_size": 65536,
+    "modelx": {
+      "run_mode": "Train",
+      "model_hyperparameter": {
+        "activation": "lrelu",
+        "main_dnn_hidden_units": [1024, 512, 256],
+        "bias_dnn_hidden_units": [512, 256, 128],
+        "logits_dnn_hidden_units": [128],
+        "use_ubp": false,
+        "cross_net_layers": 0,
+        "need_dropout": true,
+        "dropout_rate": 0.5,
+        "dnn_l2_reg": 1e-6,
+        "atten_param": {
+          "seq_len": 100,
+          "atten_type": "parallel",
+          "multihead": true,
+          "self": true,
+          "atten_mode": "ln",
+          "residual_connection": true,
+          "attention_normalize": true,
+          "attention_l2_reg": 1e-5,
+          "sa_num_units": 128,
+          "sa_num_output_units": 128,
+          "ma_num_units": 128,
+          "ma_num_output_units": 128,
+          "num_heads": 8,
+          "seq_type": "concat"
+        },
+        "batch_norm": true,
+        "position_loss": false,
+        "position_alpha": 0.5,
+        "position_beta": 0.35,
+        "position_gamma": 5.0,
+        "gate_net": false,
+        "gate_hidden_units": [256, 128, 64],
+        "long_short_term_hidden_units": [512, 256, 128]
+      }
+    },
+    "optimizer": {
+      "Adagrad": {
+        "scope": "Global",
+        "lr_func": "cold_start",
+        "learning_rate": 0.008,
+        "lrcs_init_lr": 0.008,
+        "lrcs_init_step": 20000,
+        "decay_step": 10000,
+        "decay_rate": 0.94,
+        "clip_gradients": 5.0,
+        "staircase": true
+      }
+    },
+    "main_columns": "user_columns;item_columns",
+    "bias_columns": "bias_columns",
+    "cross_columns": "cross_columns"
+  }
+}
